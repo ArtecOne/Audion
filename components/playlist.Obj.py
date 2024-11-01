@@ -1,11 +1,13 @@
 import flet as ft
 import asyncio
 from utils.findFile import find_file
+from base64 import b64encode
 
 class PlaylistUI(ft.Container):
     def __init__(self, parent: ft.Container , photoURL: str = None , title: str = None , creator: str = None):
         super().__init__()
         self.isolated = True
+        self.is_isolated = lambda: self.isolated
         self.parent = parent
         self.photoURL = photoURL
         self.title = title
@@ -87,7 +89,7 @@ if __name__ == "__main__":
                                   scroll= ft.ScrollMode.ALWAYS,)
         
         playlists = {
-            "Mamaguevo": PlaylistUI(playlistFrame , find_file("assets/img/1384060.png") , "Mamaguevo" , "Creator"),
+            "Mamaguevo": PlaylistUI(playlistFrame , find_file("assets/img/1384060.png"), "Mamaguevo" , "Creator"),
         }
         
         controls = [
@@ -96,7 +98,10 @@ if __name__ == "__main__":
         
         for i in range(10):
             controls.append(
-                PlaylistUI(playlistFrame , find_file("assets/img/1384060.png") , f"Playlist {i}" , "Creator")
+                PlaylistUI(playlistFrame,
+                           find_file("assets/img/1384060.png"),
+                           f"Playlist {i}",
+                           "Creator")
             )
         
         playlistFrame.controls = controls
@@ -115,10 +120,5 @@ if __name__ == "__main__":
         await asyncio.sleep(3)
         
         playlists["Mamaguevo"].switchPlaying()
-        
-        
-        
-        
-        
     
     asyncio.run(ft.app_async(main))
