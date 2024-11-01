@@ -3,8 +3,9 @@ import asyncio
 
 class effect:
 
-    def __init__(self, parent: ft.Container):
+    def __init__(self, parent: ft.Container, effectType : str):
         
+        self.effectType = effectType
         self.parent = parent
         self.width = 276
         self.height = 45
@@ -16,12 +17,7 @@ class effect:
         data = ft.Container(
             content= ft.Column(
                 controls=[
-                    ft.Text("Effects:", size= 16),
-                    ft.Text("Reverb" , size= 14),
-                    ft.Slider(min=0, max=100, divisions=10, label="{value}%"),
-                    ft.Text("Chorus" , size= 14),
-                    ft.Slider(min=0, max=100, divisions=10, label="{value}%"),
-                    ft.Text("Phaser" , size= 14),
+                    ft.Text(self.effectType , size= 14),
                     ft.Slider(min=0, max=100, divisions=10, label="{value}%")
                 ]
             ),
@@ -40,13 +36,13 @@ if __name__ == "__main__":
     async def main(page: ft.Page):
         
         effectsFrame = ft.Container()
-        effect_instance = effect(effectsFrame) 
-        effectsFrame.content = effect_instance.content  
+        effect_instance = effect(effectsFrame, "Chorus")
+        effectsFrame.content = effect_instance.content
+        
         page.add(
             effectsFrame
         )
 
 ft.app(target=main)
 
-    
     
