@@ -1,5 +1,6 @@
 import flet as ft
 import asyncio
+from components import effectObj
 
 class App:
     def __init__(self , page : ft.Page):
@@ -16,15 +17,13 @@ class App:
         self.init()
         
     def init(self):
-        text = ft.Text("Hello, World", bgcolor=ft.colors.GREEN)
 
+        effectObj.effect.constructor()
         self.page.add(
-            text
-            )
+        )
 
 
 async def main(page : ft.Page):
-    
     App(page)
 
 
